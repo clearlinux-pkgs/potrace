@@ -4,13 +4,14 @@
 #
 Name     : potrace
 Version  : 1.15
-Release  : 1
+Release  : 2
 URL      : http://potrace.sourceforge.net/download/1.15/potrace-1.15.tar.gz
 Source0  : http://potrace.sourceforge.net/download/1.15/potrace-1.15.tar.gz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-2.0
 Requires: potrace-bin = %{version}-%{release}
+Requires: potrace-lib = %{version}-%{release}
 Requires: potrace-license = %{version}-%{release}
 Requires: potrace-man = %{version}-%{release}
 BuildRequires : pkgconfig(zlib)
@@ -39,6 +40,17 @@ Requires: potrace-man = %{version}-%{release}
 bin components for the potrace package.
 
 
+%package dev
+Summary: dev components for the potrace package.
+Group: Development
+Requires: potrace-lib = %{version}-%{release}
+Requires: potrace-bin = %{version}-%{release}
+Provides: potrace-devel = %{version}-%{release}
+
+%description dev
+dev components for the potrace package.
+
+
 %package doc
 Summary: doc components for the potrace package.
 Group: Documentation
@@ -46,6 +58,15 @@ Requires: potrace-man = %{version}-%{release}
 
 %description doc
 doc components for the potrace package.
+
+
+%package lib
+Summary: lib components for the potrace package.
+Group: Libraries
+Requires: potrace-license = %{version}-%{release}
+
+%description lib
+lib components for the potrace package.
 
 
 %package license
@@ -72,8 +93,8 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1543754054
-%configure --disable-static
+export SOURCE_DATE_EPOCH=1543821889
+%configure --disable-static --with-libpotrace
 make  %{?_smp_mflags}
 
 %check
@@ -84,7 +105,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1543754054
+export SOURCE_DATE_EPOCH=1543821889
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/potrace
 cp COPYING %{buildroot}/usr/share/package-licenses/potrace/COPYING
@@ -98,9 +119,19 @@ cp COPYING %{buildroot}/usr/share/package-licenses/potrace/COPYING
 /usr/bin/mkbitmap
 /usr/bin/potrace
 
+%files dev
+%defattr(-,root,root,-)
+/usr/include/*.h
+/usr/lib64/libpotrace.so
+
 %files doc
 %defattr(0644,root,root,0755)
 %doc /usr/share/doc/potrace/*
+
+%files lib
+%defattr(-,root,root,-)
+/usr/lib64/libpotrace.so.0
+/usr/lib64/libpotrace.so.0.0.5
 
 %files license
 %defattr(0644,root,root,0755)
