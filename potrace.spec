@@ -4,9 +4,9 @@
 #
 Name     : potrace
 Version  : 1.15
-Release  : 2
-URL      : http://potrace.sourceforge.net/download/1.15/potrace-1.15.tar.gz
-Source0  : http://potrace.sourceforge.net/download/1.15/potrace-1.15.tar.gz
+Release  : 3
+URL      : https://sourceforge.net/projects/potrace/files/1.15/potrace-1.15.tar.gz
+Source0  : https://sourceforge.net/projects/potrace/files/1.15/potrace-1.15.tar.gz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-2.0
@@ -93,7 +93,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1543821889
+export SOURCE_DATE_EPOCH=1545592772
 %configure --disable-static --with-libpotrace
 make  %{?_smp_mflags}
 
@@ -105,7 +105,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1543821889
+export SOURCE_DATE_EPOCH=1545592772
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/potrace
 cp COPYING %{buildroot}/usr/share/package-licenses/potrace/COPYING
