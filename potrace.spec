@@ -4,7 +4,7 @@
 #
 Name     : potrace
 Version  : 1.15
-Release  : 3
+Release  : 4
 URL      : https://sourceforge.net/projects/potrace/files/1.15/potrace-1.15.tar.gz
 Source0  : https://sourceforge.net/projects/potrace/files/1.15/potrace-1.15.tar.gz
 Summary  : No detailed summary available
