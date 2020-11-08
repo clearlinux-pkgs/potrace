@@ -4,10 +4,10 @@
 #
 Name     : potrace
 Version  : 1.16
-Release  : 5
+Release  : 6
 URL      : https://sourceforge.net/projects/potrace/files/1.16/potrace-1.16.tar.gz
 Source0  : https://sourceforge.net/projects/potrace/files/1.16/potrace-1.16.tar.gz
-Summary  : Utility for tracing a bitmap (input: PBM,PGM,PPM,BMP; output: EPS,PS,PDF,SVG,DXF,PGM,Gimppath,XFig)
+Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-2.0
 Requires: potrace-bin = %{version}-%{release}
@@ -45,7 +45,6 @@ Group: Development
 Requires: potrace-lib = %{version}-%{release}
 Requires: potrace-bin = %{version}-%{release}
 Provides: potrace-devel = %{version}-%{release}
-Requires: potrace = %{version}-%{release}
 Requires: potrace = %{version}-%{release}
 
 %description dev
@@ -88,21 +87,21 @@ man components for the potrace package.
 
 %prep
 %setup -q -n potrace-1.16
+cd %{_builddir}/potrace-1.16
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1571003469
-# -Werror is for werrorists
+export SOURCE_DATE_EPOCH=1604875634
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
 export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %configure --disable-static --with-libpotrace
 make  %{?_smp_mflags}
@@ -112,10 +111,10 @@ export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-make VERBOSE=1 V=1 %{?_smp_mflags} check
+make %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1571003469
+export SOURCE_DATE_EPOCH=1604875634
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/potrace
 cp %{_builddir}/potrace-1.16/COPYING %{buildroot}/usr/share/package-licenses/potrace/442fcd42809b532269b4666c6fe50071e4a6b17e
